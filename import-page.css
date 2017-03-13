@@ -1,0 +1,44 @@
+/**
+ * Styles for admin file import page.
+ */
+
+.pdi-jumbo {
+	text-align: center;
+	margin-right: 20px;
+	border-radius: 4px;
+	color: white;
+	background-color: #333;
+	font-family: helvetica;
+	text-shadow: 1px 1px 2px black;
+}
+
+.pdi-jumbo ::-moz-selection {
+	background-color: black;
+}
+
+.pdi-jumbo ::selection {
+	background-color: black;
+}
+
+.pdi-jumbo p {
+	margin: 0px 10px 10px;
+}
+
+.pdi-jumbo .pdi-btn-wrap {
+	margin-top: 20px;
+}
+
+.pdi-jumbo .divider {
+	width: 200px;
+	height: 1px;
+	border-top: 1px dashed rgba( 255, 255, 255, 0.5 );
+	margin: 0 auto;
+}
+
+.pdi-hidden {
+	display: none !important;
+}
+
+.alert {
+	margin: 20px 20px 0 0 ;
+}
