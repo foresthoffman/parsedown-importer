@@ -11,7 +11,18 @@
 		input_field.addEventListener( 'change', function( event ) {
 			var files = event.target.files;
 
+			disable_alerts();
+
+			var list_label = document.querySelector( '.pdi-file-list-label' );
+			list_label.innerHTML = 'Files to Import';
+
 			var list_tag = document.querySelector( '.pdi-file-list' );
+			if ( list_tag ) {
+				list_tag.remove();
+			}
+
+			var new_list_tag = document.createElement( 'ul' );
+			new_list_tag.classList.add( 'pdi-file-list', 'list-group' );
 			for ( var i = 0; i < files.length; i++ ) {
 				var item = document.createElement( 'li' );
 				item.classList.add( 'list-group-item' );
@@ -20,15 +31,24 @@
 					item.classList.add( 'list-group-item-danger' );
 					item.innerHTML += ' - Invalid file type, won\'t upload';
 				}
-				list_tag.appendChild( item );
+				new_list_tag.appendChild( item );
 			}
 
-			import_btn.classList.remove('pdi-hidden');
+			list_label.after( new_list_tag );
+			list_label.classList.remove( 'pdi-hidden' );
+
+			var import_btn = document.querySelector( '.pdi-btn-import' );
+			import_btn.classList.remove( 'pdi-hidden' );
+			import_btn.querySelector( '.btn' ).classList.remove( 'disabled' );
 		});
 
 		var import_btn = document.querySelector( '.pdi-btn-import' );
 		import_btn.addEventListener( 'click', function( event ) {
 			var btn = event.target;
+			if ( ! btn.classList.contains( 'btn' ) ) {
+				btn = btn.querySelector( '.btn' );
+			}
+
 			var form_data = new FormData();
 			for ( var i = 0; i < input_field.files.length; i++ ) {
 				var file = input_field.files[ i ];
@@ -42,6 +62,8 @@
 			// disables the import button
 			btn.classList.add( 'disabled' );
 
+			disable_alerts();
+
 			if ( form_data.getAll( 'files[]' ).length > 0 ) {
 				jQuery.ajax({
 					url: PDI.ajax_url,
@@ -51,17 +73,37 @@
 					processData: false,
 					data: form_data,
 					success: function( res ) {
-						event.target.disabled = false;
-
 						var json = JSON.parse( res );
 						if ( json ) {
 							if ( '1' === json.status ) {
 								var alert_success = display_success();
 								alert_success.innerHTML = 'Import succeeded.';
 
+								var list_label = document.querySelector( '.pdi-file-list-label' );
+								list_label.innerHTML = 'Added Posts';
+
+								var list_tag = document.querySelector( '.pdi-file-list' );
+								if ( list_tag ) {
+									list_tag.remove();
+								}
+
+								var new_list_tag = document.createElement( 'ul' );
+								new_list_tag.classList.add( 'pdi-file-list', 'list-group' );
+								for ( var i = 0; i < json.new_posts.length; i++ ) {
+									var item = document.createElement( 'li' );
+									item.classList.add( 'list-group-item',
+										'list-group-item-success' );
+									var a = document.createElement( 'a' );
+									a.href = json.new_posts[ i ].post_perma;
+									a.innerHTML = json.new_posts[ i ].post_title;
+									item.appendChild( a );
+									new_list_tag.appendChild( item );
+								}
+								list_label.after( new_list_tag );
+
 								// hides the import button
-								import_btn.classList.add( 'pdi-hidden' );
-								import_btn.classList.remove( 'disabled' );
+								btn.parentElement.classList.add( 'pdi-hidden' );
+								btn.classList.remove( 'disabled' );
 							} else {
 								ajax_error_callback( res );
 							}
@@ -70,7 +112,9 @@
 					error: ajax_error_callback
 				});
 			} else {
-
+				var alert_danger = display_error();
+				alert_danger.innerHTML = 'No valid files provided; only <code>.md</code> files ' +
+					'are allowed. Try again.';
 			}
 		});
 
@@ -151,6 +195,18 @@
 			}
 
 			return alert_danger;
+		}
+
+		/**
+		 * Turns off all alerts.
+		 */
+		function disable_alerts() {
+			var alerts = document.querySelectorAll( '.alert' );
+			for ( var i = 0; i < alerts.length; i++ ) {
+				if ( ! alerts[ i ].classList.contains( 'pdi-hidden' ) ) {
+					alerts[ i ].classList.add( 'pdi-hidden' );
+				}
+			}
 		}
 	};
 })();

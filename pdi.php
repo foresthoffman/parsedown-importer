@@ -85,7 +85,8 @@ if ( ! class_exists( 'ParsedownImporter' ) ) {
 				<p class='pdi-btn-wrap pdi-btn-select'><a href='#' class='btn btn-primary' role='button'>Select files</a></p>
 				<input class='pdi-file-input pdi-hidden' name='pdi-file-input' type='file' value='' multiple />
 			</div>
-			<ul class='pdi-file-list list-group'></ul>
+			<label class='pdi-file-list-label pdi-hidden' for='pdi-file-list'></label>
+			<!-- <ul class='pdi-file-list list-group'></ul> -->
 			<p class='pdi-btn-wrap pdi-btn-import pdi-hidden'><a href='#' class='btn btn-primary' role='button'>Import</a></p>
 			<?php
 		}
