@@ -85,6 +85,60 @@ if ( ! class_exists( 'ParsedownImporter' ) ) {
 				<p class='pdi-btn-wrap pdi-btn-select'><a href='#' class='btn btn-primary' role='button'>Select files</a></p>
 				<input class='pdi-file-input pdi-hidden' name='pdi-file-input' type='file' value='' multiple />
 			</div>
+			<div class='pdi-import-options'>
+				<h3>Import Settings</h3>
+				<!-- post status option -->
+
+				<label class='pdi-import-option-label' for='pdi-import-post-status'>
+					Post status:
+				</label>
+				<select class='pdi-import-post-status'>
+					<option value='draft' selected>Draft</option>
+					<option value='publish'>Publish (not recommended)</option>
+					<option value='private'>Private</option>
+				</select>
+				<!-- #post status option -->
+
+				<br/>
+
+				<!-- post type option -->
+				<label class='pdi-import-option-label' for='pdi-import-post-status'>
+					Post Type:
+				</label>
+				<select class='pdi-import-post-type'>
+					<option value='post' selected>Post</option>
+					<option value='page'>Page</option>
+				</select>
+				<!-- #post type option -->
+
+				<br/>
+
+				<!-- post author option -->
+				<label class='pdi-import-option-label' for='pdi-import-post-status'>
+					Post author:
+				</label>
+				<select class='pdi-import-post-author'>
+					<?php
+					$user_array = get_users( array(
+						'role__in' => array( 'administrator', 'editor', 'author', 'contributor' ),
+						'orderby'  => 'Display Name',
+						'fields'   => array(
+							'ID',
+							'display_name'
+						)
+					));
+					foreach ( $user_array as $user ) {
+						printf(
+							'<option value="%d"%s>%s</option>',
+							$user->ID,
+							( (int) $user->ID === get_current_user_id() ? ' selected' : '' ),
+							$user->display_name
+						);
+					}
+					?>
+				</select>
+				<!-- #post author option -->
+			</div>
 			<label class='pdi-file-list-label pdi-hidden' for='pdi-file-list'></label>
 			<!-- <ul class='pdi-file-list list-group'></ul> -->
 			<p class='pdi-btn-wrap pdi-btn-import pdi-hidden'><a href='#' class='btn btn-primary' role='button'>Import</a></p>
@@ -107,6 +161,39 @@ if ( ! class_exists( 'ParsedownImporter' ) ) {
 
 			if ( isset( $_FILES ) && isset( $_FILES['files'] ) && count( $_FILES['files'] ) > 0 ) {
 				$files = $_FILES['files'];
+				$post_status = '';
+				$post_type = '';
+				$post_author = 0;
+
+				if ( ! empty( $_POST['post_status'] ) ) {
+					$temp_status = strtolower( $_POST['post_status'] );
+					if ( 'draft' === $temp_status ||
+							'publish' === $temp_status ||
+							'private' === $temp_status ) {
+						$post_status = $temp_status;
+					} else {
+						$post_status = 'draft';
+					}
+				}
+
+				if ( ! empty( $_POST['post_type'] ) ) {
+					$temp_type = strtolower( $_POST['post_type'] );
+					if ( 'post' === $temp_type || 'page' === $temp_type ) {
+						$post_type = $temp_type;
+					} else {
+						$post_type = 'post';
+					}
+				}
+
+				if ( ! empty( $_POST['post_author'] ) ) {
+					$temp_author = (int) $_POST['post_author'];
+					if ( $temp_author > 0 && user_can( $temp_author, 'edit_posts' ) ) {
+						$post_author = $temp_author;
+					} else {
+						$post_author = get_current_user_id();
+					}
+				}
+
 				for ( $i = 0; $i < count( $files['error'] ); $i++ ) {
 					$text = $buffer = '';
 					$post_title = substr( $files['name'][ $i ], 0, -3 );
@@ -120,16 +207,17 @@ if ( ! class_exists( 'ParsedownImporter' ) ) {
 						$pd_text = $Parsedown->text( $text );
 
 						$postarr = array(
-							'post_status'  => 'private',               // will be customizable
-							'post_type'    => 'post',                  // will be customizable
-							'post_author'  => get_current_user_id(),   // will be customizable
+							'post_status'  => $post_status,
+							'post_type'    => $post_type,
+							'post_author'  => $post_author,
 							'post_title'   => esc_html( $post_title ),
 							'post_content' => $pd_text
 						);
 						if ( $post_id = wp_insert_post( $postarr ) ) {
 							$new_posts[] = array(
 								'post_title' => $post_title,
-								'post_perma' => get_post_permalink( $post_id )
+								'post_perma' => get_post_permalink( $post_id ),
+								'edit_perma' => admin_url() . "post.php?post={$post_id}&action=edit",
 							);
 						} else {
 
@@ -152,8 +240,13 @@ if ( ! class_exists( 'ParsedownImporter' ) ) {
 			}
 
 			// success
-			$response['status'] = '1';
-			$response['new_posts'] = $new_posts;
+			$response['status']           = '1';
+
+			// used for outputting the added posts
+			$response['new_posts']        = $new_posts;
+			$response['post_status']      = $post_status;
+			$response['post_type']        = $post_type;
+			$response['post_author_name'] = get_userdata( $post_author )->display_name;
 			wp_die( json_encode( $response ) );
 		}
 	}

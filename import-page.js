@@ -58,6 +58,9 @@
 			}
 			form_data.append( 'action', 'pdi_import' );
 			form_data.append( '_ajax_nonce', PDI.nonce );
+			form_data.append( 'post_status', document.querySelector( '.pdi-import-post-status' ).value );
+			form_data.append( 'post_type'  , document.querySelector( '.pdi-import-post-type' ).value );
+			form_data.append( 'post_author', document.querySelector( '.pdi-import-post-author' ).value );
 
 			// disables the import button
 			btn.classList.add( 'disabled' );
@@ -80,7 +83,10 @@
 								alert_success.innerHTML = 'Import succeeded.';
 
 								var list_label = document.querySelector( '.pdi-file-list-label' );
-								list_label.innerHTML = 'Added Posts';
+								list_label.innerHTML = 'Added the following posts of status, ' +
+									'<code>' + json.post_status + '</code>, and type, ' +
+									'<code>' + json.post_type + '</code>, by: ' +
+									'<code>' + json.post_author_name + '</code>.';
 
 								var list_tag = document.querySelector( '.pdi-file-list' );
 								if ( list_tag ) {
@@ -93,10 +99,19 @@
 									var item = document.createElement( 'li' );
 									item.classList.add( 'list-group-item',
 										'list-group-item-success' );
-									var a = document.createElement( 'a' );
-									a.href = json.new_posts[ i ].post_perma;
-									a.innerHTML = json.new_posts[ i ].post_title;
-									item.appendChild( a );
+
+									var a_perm = document.createElement( 'a' );
+									a_perm.classList.add( 'post-view-perma' );
+									a_perm.href = json.new_posts[ i ].post_perma;
+									a_perm.innerHTML = json.new_posts[ i ].post_title;
+									item.appendChild( a_perm );
+
+									var a_edit = document.createElement( 'a' );
+									a_edit.classList.add( 'post-edit-perma' );
+									a_edit.href = json.new_posts[ i ].edit_perma;
+									a_edit.innerHTML = 'Edit';
+									item.appendChild( a_edit );
+
 									new_list_tag.appendChild( item );
 								}
 								list_label.after( new_list_tag );
