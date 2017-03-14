@@ -12,7 +12,7 @@
  * @package         Pdi
  */
 
-require_once 'inc/Parsedown.php';
+require_once dirname( __FILE__ ) . '/ParsedownExtended.php';
 
 if ( ! class_exists( 'ParsedownImporter' ) ) {
 	class ParsedownImporter {
@@ -156,7 +156,7 @@ if ( ! class_exists( 'ParsedownImporter' ) ) {
 			}
 
 			$new_posts = array();
-			$Parsedown = new Parsedown();
+			$Parsedown = new ParsedownExtended();
 
 			if ( isset( $_FILES ) && isset( $_FILES['files'] ) && count( $_FILES['files'] ) > 0 ) {
 				$files = $_FILES['files'];

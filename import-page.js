@@ -77,6 +77,7 @@
 					data: form_data,
 					success: function( res ) {
 						var json = JSON.parse( res );
+
 						if ( json ) {
 							if ( '1' === json.status ) {
 								var alert_success = display_success();
