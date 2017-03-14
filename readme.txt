@@ -3,7 +3,7 @@ Contributors: foresthoffman
 Tags: posts, pages, admin, importer
 Requires at least: 3.7
 Tested up to: 4.7
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,9 @@ This plugin utilizes the [Parsedown](http://parsedown.org) PHP library by [Emanu
 4. Click the 'Import' button
 
 == Changelog ==
+
+= 1.0.1 =
+* Updated checkbox regex to allow brackets with no space in between.
 
 = 1.0.0 =
 * Updated readme(s) and plugin details.

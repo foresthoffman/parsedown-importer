@@ -22,7 +22,7 @@ class ParsedownExtended extends Parsedown {
 	 * @return return The checkbox-input block.
 	 */
 	protected function blockCheckbox( array $Line ) {
-		if ( preg_match( '/^[ ]{0,3}\[(x| )\] (.*)$/mi', $Line['text'], $matches ) ) {
+		if ( preg_match( '/^[ ]{0,3}\[(x| ?)\] (.*)$/mi', $Line['text'], $matches ) ) {
 			$checked = 'x' === strtolower( $matches[1] ) ? true : false;
 
 			// defines the outer block element

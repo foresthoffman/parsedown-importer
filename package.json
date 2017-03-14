@@ -1,8 +1,8 @@
 {
   "name": "pdi",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "main": "Gruntfile.js",
-  "author": "YOUR NAME HERE",
+  "author": "Forest Hoffman",
   "devDependencies": {
     "bootstrap": "^3.3.7",
     "grunt": "~0.4.5",
