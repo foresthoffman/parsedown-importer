@@ -77,67 +77,66 @@ if ( ! class_exists( 'ParsedownImporter' ) ) {
 			<div class='alert alert-success pdi-hidden' role='alert'></div>
 			<h1>Parsedown Import</h1>
 			<p>Import Markdown files (ending with <code>.md</code>) and convert them directly into WordPress posts/pages.</p>
-			<div class='jumbotron pdi-jumbo'>
-				<p>
-					Drag and drop<br/>or
-				</p>
-				<div class='divider'></div>
-				<p class='pdi-btn-wrap pdi-btn-select'><a href='#' class='btn btn-primary' role='button'>Select files</a></p>
-				<input class='pdi-file-input pdi-hidden' name='pdi-file-input' type='file' value='' multiple />
-			</div>
 			<div class='pdi-import-options'>
 				<h3>Import Settings</h3>
 				<!-- post status option -->
 
-				<label class='pdi-import-option-label' for='pdi-import-post-status'>
-					Post status:
-				</label>
-				<select class='pdi-import-post-status'>
-					<option value='draft' selected>Draft</option>
-					<option value='publish'>Publish (not recommended)</option>
-					<option value='private'>Private</option>
-				</select>
+				<div class='pdi-import-option-wrap'>
+					<label class='pdi-import-option-label' for='pdi-import-post-status'>
+						Post status:
+					</label>
+					<select class='pdi-import-post-status'>
+						<option value='draft' selected>Draft</option>
+						<option value='publish'>Publish (not recommended)</option>
+						<option value='private'>Private</option>
+					</select>
+				</div>
 				<!-- #post status option -->
 
-				<br/>
-
 				<!-- post type option -->
-				<label class='pdi-import-option-label' for='pdi-import-post-status'>
-					Post Type:
-				</label>
-				<select class='pdi-import-post-type'>
-					<option value='post' selected>Post</option>
-					<option value='page'>Page</option>
-				</select>
+				<div class='pdi-import-option-wrap'>
+					<label class='pdi-import-option-label' for='pdi-import-post-status'>
+						Post Type:
+					</label>
+					<select class='pdi-import-post-type'>
+						<option value='post' selected>Post</option>
+						<option value='page'>Page</option>
+					</select>
+				</div>
 				<!-- #post type option -->
 
-				<br/>
-
 				<!-- post author option -->
-				<label class='pdi-import-option-label' for='pdi-import-post-status'>
-					Post author:
-				</label>
-				<select class='pdi-import-post-author'>
-					<?php
-					$user_array = get_users( array(
-						'role__in' => array( 'administrator', 'editor', 'author', 'contributor' ),
-						'orderby'  => 'Display Name',
-						'fields'   => array(
-							'ID',
-							'display_name'
-						)
-					));
-					foreach ( $user_array as $user ) {
-						printf(
-							'<option value="%d"%s>%s</option>',
-							$user->ID,
-							( (int) $user->ID === get_current_user_id() ? ' selected' : '' ),
-							$user->display_name
-						);
-					}
-					?>
-				</select>
+				<div class='pdi-import-option-wrap'>
+					<label class='pdi-import-option-label' for='pdi-import-post-status'>
+						Post author:
+					</label>
+					<select class='pdi-import-post-author'>
+						<?php
+						$user_array = get_users( array(
+							'role__in' => array( 'administrator', 'editor', 'author', 'contributor' ),
+							'orderby'  => 'Display Name',
+							'fields'   => array(
+								'ID',
+								'display_name'
+							)
+						));
+						foreach ( $user_array as $user ) {
+							printf(
+								'<option value="%d"%s>%s</option>',
+								$user->ID,
+								( (int) $user->ID === get_current_user_id() ? ' selected' : '' ),
+								$user->display_name
+							);
+						}
+						?>
+					</select>
+				</div>
 				<!-- #post author option -->
+
+				<div class='pdi-file-input-wrap'>
+					<p class='pdi-btn-wrap pdi-btn-select'><a href='#' class='btn btn-primary' role='button'>Select files</a></p>
+					<input class='pdi-file-input pdi-hidden' name='pdi-file-input' type='file' value='' multiple />
+				</div>
 			</div>
 			<label class='pdi-file-list-label pdi-hidden' for='pdi-file-list'></label>
 			<!-- <ul class='pdi-file-list list-group'></ul> -->
