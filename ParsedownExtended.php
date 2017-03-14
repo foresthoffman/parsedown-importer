@@ -3,10 +3,7 @@
 /**
  * Parsedown Extended adds some additional block definitions to the Parsedown class.
  *
- * Parsedown Extended (c) Forest Hoffman
- *
- * Parsedown is the copyright of Emanuil Rusev (http://erusev.com). There is not affiliation
- * between Forest Hoffman and Emanuil Rusev or Parsedown.
+ * @package Pdi
  */
 require_once dirname( __FILE__ ) . '/inc/Parsedown.php';
 

@@ -1,15 +1,29 @@
 <?php
 /**
  * Plugin Name:     Parsedown Importer
- * Plugin URI:      http://foresthoffman.com/
- * Description:     A markdown importer to translate files to WordPress posts.
+ * Version:         1.0.0
+ * Description:     An unofficial Parsedown importer for translating Markdown files into WordPress posts/pages.
  * Author:          Forest Hoffman
  * Author URI:      http://foresthoffman.com/
+ * Plugin URI:      http://foresthoffman.com/
  * Text Domain:     pdi
  * Domain Path:     /languages
- * Version:         0.1.0
+ * License: 		GPL2
  *
- * @package         Pdi
+ * Parsedown Importer is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * any later version.
+ *
+ * Parsedown Importer is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Parsedown Importer. If not, see http://www.gnu.org/licenses/gpl-2.0.txt.
+ *
+ * @package Pdi
  */
 
 require_once dirname( __FILE__ ) . '/ParsedownExtended.php';
