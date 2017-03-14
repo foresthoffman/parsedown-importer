@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name:     Parsedown Importer
- * Plugin URI:      PLUGIN SITE HERE
- * Description:     PLUGIN DESCRIPTION HERE
- * Author:          YOUR NAME HERE
- * Author URI:      YOUR SITE HERE
+ * Plugin URI:      http://foresthoffman.com/
+ * Description:     A markdown importer to translate files to WordPress posts.
+ * Author:          Forest Hoffman
+ * Author URI:      http://foresthoffman.com/
  * Text Domain:     pdi
  * Domain Path:     /languages
  * Version:         0.1.0
