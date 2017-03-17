@@ -16,6 +16,7 @@
 
 .pdi-file-list {
 	margin-right: 20px;
+	max-width: 400px;
 }
 
 .pdi-file-list-label {
