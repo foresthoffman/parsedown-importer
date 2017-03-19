@@ -84,9 +84,9 @@
 								alert_success.innerHTML = 'Import succeeded.';
 
 								var list_label = document.querySelector( '.pdi-file-list-label' );
-								list_label.innerHTML = 'Added the following posts of status, ' +
-									'<code>' + json.post_status + '</code>, and type, ' +
-									'<code>' + json.post_type + '</code>, by: ' +
+								list_label.innerHTML = 'Added the following ' +
+									'<code>' + json.post_type + '</code>\'s of status, ' +
+									'<code>' + json.post_status + '</code>, by ' +
 									'<code>' + json.post_author_name + '</code>.';
 
 								var list_tag = document.querySelector( '.pdi-file-list' );
