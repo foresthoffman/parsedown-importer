@@ -2,7 +2,16 @@
 
 trunk_path=~/Documents/Programming/Wordpress/plugin-repos/parsedown-importer/trunk
 
-
 echo "Copying files to $trunk_path"
 
-cp -R .. $trunk_path
+cp -Rf .. $trunk_path
+
+if [[ -d "$trunk_path/.git" ]]; then
+	echo "Removing .git directory from target directory"
+	rm -rf $trunk_path/.git
+fi
+
+if [[ -f "$trunk_path/.gitignore" ]]; then
+	echo "Removing .gitignore from target directory"
+	rm -f $trunk_path/.gitignore
+fi
