@@ -5,7 +5,7 @@
  * Description:     An unofficial Parsedown importer for translating Markdown files into WordPress posts/pages.
  * Author:          Forest Hoffman
  * Author URI:      http://foresthoffman.com/
- * Plugin URI:      http://foresthoffman.com/
+ * Plugin URI:      https://plugins.svn.wordpress.org/parsedown-importer/
  * Text Domain:     pdi
  * Domain Path:     /languages
  * License: 		GPL2
