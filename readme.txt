@@ -51,8 +51,17 @@ Q: Usage
 
 == Changelog ==
 
+= 1.0.5 =
+* Updated successful import file list header content
+
+= 1.0.4 =
+* Updated successful import file list width
+
+= 1.0.3 =
+* Removed node_modules from .gitignore
+
 = 1.0.2 =
-* Update readme
+* Updated readme
 
 = 1.0.1 =
 * Updated checkbox regex to allow brackets with no space in between.
