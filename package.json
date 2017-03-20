@@ -1,6 +1,6 @@
 {
   "name": "pdi",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "Gruntfile.js",
   "author": "Forest Hoffman",
   "devDependencies": {
