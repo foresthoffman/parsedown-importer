@@ -34,7 +34,7 @@
 
 				// attempts to infer the type from the file name, if for some reason the File object
 				// didn't receive the file type data (this seems to occur on Windows 10)
-				if ( 'text/markdown' !== files[ i ].type || 0 === files[ i ].name.match( /.*\.(md|markdown|mdown)/ ).length ) {
+				if ( 'text/markdown' !== files[ i ].type && 0 === files[ i ].name.match( /.*\.(md|markdown|mdown)$/ ).length ) {
 					validType = false;
 				} else {
 					files[ i ].type = 'text/markdown';
