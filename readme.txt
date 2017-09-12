@@ -3,7 +3,7 @@ Contributors: foresthoffman
 Tags: posts, pages, admin, importer
 Requires at least: 3.7
 Tested up to: 4.7
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,11 +45,14 @@ Q: Usage
 *Note: Only accounts with the ability to import will see the 'Tools' > 'Parsedown Import' sub-menu.*
 
 1. Navigate to the 'Tools' > 'Parsedown Import' sub-menu
-2. Click the 'Select Files' button, and select one or more Markdown (.md) files from the prompt
+2. Click the 'Select Files' button, and select one or more Markdown (.md, .markdown, or .mdown) files from the prompt
 3. Optionally change the import settings
 4. Click the 'Import' button
 
 == Changelog ==
+
+= 1.0.8 =
+* Update file type validation to deal with Windows 10 silliness.
 
 = 1.0.7 =
 * Update readme and tags.

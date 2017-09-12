@@ -1,6 +1,6 @@
 #!/bin/bash
 
-trunk_path=~/Documents/Programming/Wordpress/plugin-repos/parsedown-importer/trunk
+trunk_path=$CODE/Wordpress/plugin-repos/parsedown-importer/trunk
 
 echo "Copying files to $trunk_path"
 
