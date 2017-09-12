@@ -29,6 +29,9 @@
 				item.classList.add( 'list-group-item' );
 				item.innerHTML = files[ i ].name;
 
+				//
+				console.log(files[ i ]);
+
 				// attempts to infer the type from the file name, if for some reason the File object
 				// didn't receive the file type data (this seems to occur on Windows 10)
 				if ( 'text/markdown' !== files[ i ].type || 0 === files[ i ].name.match( /.*\.(md|markdown|mdown)/ ).length ) {
