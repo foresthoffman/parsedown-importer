@@ -45,7 +45,7 @@ Q: Usage
 *Note: Only accounts with the ability to import will see the 'Tools' > 'Parsedown Import' sub-menu.*
 
 1. Navigate to the 'Tools' > 'Parsedown Import' sub-menu
-2. Click the 'Select Files' button, and select one or more Markdown (.md) files from the prompt
+2. Click the 'Select Files' button, and select one or more Markdown (.md, .markdown, or .mdown) files from the prompt
 3. Optionally change the import settings
 4. Click the 'Import' button
 

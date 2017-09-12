@@ -90,7 +90,7 @@ if ( ! class_exists( 'ParsedownImporter' ) ) {
 			<div class='alert alert-danger pdi-hidden' role='alert'></div>
 			<div class='alert alert-success pdi-hidden' role='alert'></div>
 			<h1>Parsedown Import</h1>
-			<p>Import Markdown files (ending with <code>.md</code>) and convert them directly into WordPress posts/pages.</p>
+			<p>Import Markdown files (ending with <code>.md, .markdown, or .mdown</code>) and convert them directly into WordPress posts/pages.</p>
 			<div class='pdi-import-options'>
 				<h3>Import Settings</h3>
 				<!-- post status option -->

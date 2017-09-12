@@ -24,10 +24,19 @@
 			var new_list_tag = document.createElement( 'ul' );
 			new_list_tag.classList.add( 'pdi-file-list', 'list-group' );
 			for ( var i = 0; i < files.length; i++ ) {
+				var validType = true;
 				var item = document.createElement( 'li' );
 				item.classList.add( 'list-group-item' );
 				item.innerHTML = files[ i ].name;
-				if ( 'text/markdown' !== files[ i ].type ) {
+
+				// attempts to infer the type from the file name, if for some reason the File object
+				// didn't receive the file type data (this seems to occur on Windows 10)
+				if ( 'text/markdown' !== files[ i ].type || 0 === files[ i ].name.match( /.*\.(md|markdown|mdown)/ ).length ) {
+					validType = false;
+				} else {
+					files[ i ].type = 'text/markdown';
+				}
+				if ( ! validType ) {
 					item.classList.add( 'list-group-item-danger' );
 					item.innerHTML += ' - Invalid file type, won\'t upload';
 				}
@@ -129,7 +138,7 @@
 				});
 			} else {
 				var alert_danger = display_error();
-				alert_danger.innerHTML = 'No valid files provided; only <code>.md</code> files ' +
+				alert_danger.innerHTML = 'No valid files provided; only <code>.md, .markdown, or .mdown</code> files ' +
 					'are allowed. Try again.';
 			}
 		});
