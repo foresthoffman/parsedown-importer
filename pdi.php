@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:     Parsedown Importer
- * Version:         1.0.7
+ * Version:         1.0.8
  * Description:     An unofficial Parsedown importer for translating Markdown files into WordPress posts/pages.
  * Author:          Forest Hoffman
  * Author URI:      http://foresthoffman.com/
